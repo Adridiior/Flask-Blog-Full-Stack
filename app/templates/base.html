@@ -26,17 +26,17 @@
         <ul class="navbar-nav ml-auto">
           {% if current_user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.new_post') }}"><i class="fas fa-plus-circle"></i> New Post</a>
+              <a class="nav-link" href="{{ url_for('post.new_post') }}"><i class="fas fa-plus-circle"></i> New Post</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+              <a class="nav-link" href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+              <a class="nav-link" href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.register') }}"><i class="fas fa-user-plus"></i> Register</a>
+              <a class="nav-link" href="{{ url_for('auth.register') }}"><i class="fas fa-user-plus"></i> Register</a>
             </li>
           {% endif %}
         </ul>
@@ -54,7 +54,9 @@
       {% endwith %}
       {% block content %}{% endblock %}
     </div>
-    <a href="#" class="scroll-to-top" style="display: none;"><img src="{{ url_for('static', filename='images/up-arrow.png') }}" alt="Scroll to top" /></a>
+    <a href="#" class="scroll-to-top" style="display: none;">
+      <img src="{{ url_for('static', filename='images/up-arrow.png') }}" alt="Scroll to top" />
+    </a>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKpH4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6HJty5KVphtPhzWj9WO1clHTMGa9GGP6N2Jka3elKv4I5VH1X" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+djn2m5bns6pQY7GkBfKfj5f8FDjzvzzTtmI3U7ktORBrp1F" crossorigin="anonymous"></script>
