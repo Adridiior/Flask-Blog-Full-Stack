@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %} - My Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{ url_for('main.home') }}">My Blog</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {% if current_user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.new_post') }}"><i class="fas fa-plus-circle"></i> New Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('main.register') }}"><i class="fas fa-user-plus"></i> Register</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-warning" role="alert">
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+    <a href="#" class="scroll-to-top" style="display: none;"><img src="{{ url_for('static', filename='images/up-arrow.png') }}" alt="Scroll to top" /></a>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKpH4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6HJty5KVphtPhzWj9WO1clHTMGa9GGP6N2Jka3elKv4I5VH1X" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+djn2m5bns6pQY7GkBfKfj5f8FDjzvzzTtmI3U7ktORBrp1F" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+  </body>
+</html>
