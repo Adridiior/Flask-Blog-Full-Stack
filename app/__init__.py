@@ -1,14 +1,15 @@
-# app/__init__.py
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect
 from config import config
 
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
 login.login_view = 'auth.login'
+csrf = CSRFProtect()
 
 def create_app(config_name='default'):
     app = Flask(__name__)
@@ -18,6 +19,7 @@ def create_app(config_name='default'):
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
+    csrf.init_app(app)
 
     from app.routes import main_blueprint, auth_blueprint, post_blueprint, comment_blueprint
     app.register_blueprint(main_blueprint)
