@@ -35,5 +35,9 @@ def create_app(config_name='default'):
     def internal_error(error):
         db.session.rollback()
         return render_template('500.html'), 500
+    
+    from .models import User, Post, Comment  
+    with app.app_context():
+        db.create_all()
 
     return app
